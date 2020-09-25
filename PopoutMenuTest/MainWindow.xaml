@@ -1,0 +1,142 @@
+﻿<Window 
+    x:Class="PopoutMenuTest.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Pop-out Menu Example" 
+    Height="450" 
+    Width="800"
+    WindowStyle="None"
+    ResizeMode="CanResizeWithGrip"
+    MinWidth="800"
+    MinHeight="600"
+    WindowStartupLocation="CenterScreen">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="4" CaptionHeight="0" />
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Storyboard x:Key="ExpandMenuStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="ExpandedMenuGrid"
+                Storyboard.TargetProperty="(Grid.Width)"
+                To="140" 
+                Duration="0:0:0.3">
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="CollapseMenuStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="ExpandedMenuGrid"
+                Storyboard.TargetProperty="(Grid.Width)"
+                To="40" 
+                Duration="0:0:0.3">
+            </DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid Background="#404040">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#009FE3" Cursor="Hand" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <WrapPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                <fa:FontAwesome Icon="WindowMinimize" Style="{StaticResource TitleBarIconStyle}"  />
+                <fa:FontAwesome Icon="WindowMaximize" Style="{StaticResource TitleBarIconStyle}" />
+                <fa:FontAwesome Icon="Close" Style="{StaticResource TitleBarIconStyle}" MouseLeftButtonDown="CloseWindowIcon_Click" />
+            </WrapPanel>
+        </Border>
+
+        <Grid Grid.Column="0" Background="#009FE3" Grid.Row="1" x:Name="MenuBorder">
+
+            <Grid Width="40" x:Name="ExpandedMenuGrid" Background="#009FE3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="1" Text="Home" Style="{StaticResource MenuTextStyle}"  />
+                <TextBlock Grid.Row="2" Text="Calendar" Style="{StaticResource MenuTextStyle}"   />
+                <TextBlock Grid.Row="3" Text="Address Book" Style="{StaticResource MenuTextStyle}"   />
+                <TextBlock Grid.Row="5" Text="Settings" Style="{StaticResource MenuTextStyle}"   />
+                <TextBlock Grid.Row="6" Text="Logout" Style="{StaticResource MenuTextStyle}"   />
+            </Grid>
+
+            <Grid Width="40" Background="#009FE3" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+
+                <fa:ImageAwesome 
+                    Grid.Row="0" 
+                    Icon="Bars" 
+                    Style="{StaticResource MenuIconStyle}" 
+                    Width="100" 
+                    MouseLeftButtonDown="ExpandCollapseMenuIcon_Click">
+                </fa:ImageAwesome>
+
+                <fa:ImageAwesome Grid.Row="1" Icon="Home" Style="{StaticResource MenuIconStyle}" />
+                <fa:ImageAwesome Grid.Row="2" Icon="Calendar" Style="{StaticResource MenuIconStyle}" />
+                <fa:ImageAwesome Grid.Row="3" Icon="AddressBook" Style="{StaticResource MenuIconStyle}" />
+                <fa:ImageAwesome Grid.Row="5" Icon="Cog" Style="{StaticResource MenuIconStyle}" />
+                <fa:ImageAwesome Grid.Row="6" Icon="SignOut" Style="{StaticResource MenuIconStyle}" />
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <DockPanel>
+                <TextBlock 
+                    DockPanel.Dock="Top"
+                    HorizontalAlignment="Center"
+                    Text="Sample Application"
+                    FontSize="40"
+                    FontWeight="Bold"
+                    Margin="0,10"
+                    Foreground="WhiteSmoke">
+                </TextBlock>
+
+                <fa:ImageAwesome Icon="AddressCardOutline" Margin="100" Foreground="#CC2936"></fa:ImageAwesome>
+            </DockPanel>
+        </Grid>
+
+        <DockPanel VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#EDF6F9" Height="20">
+            <fa:ImageAwesome Icon="UserCircleOutline" Foreground="#000" Height="16" Margin="5,0,0,0" VerticalAlignment="Center" />
+            
+            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center">
+                <Run>Adam Feather</Run>
+                <Run>[Administrator]</Run>
+            </TextBlock>
+
+            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,16,0" VerticalAlignment="Center">
+                <Run>v1.0.0</Run>
+            </TextBlock>
+        </DockPanel>
+
+    </Grid>
+
+</Window>
