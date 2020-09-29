@@ -1,0 +1,24 @@
+﻿<UserControl 
+    x:Class="PopoutMenuTest.FooterView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="800">
+
+    <DockPanel VerticalAlignment="Center" Background="#EDF6F9" Height="20">
+        <fa:ImageAwesome Icon="UserCircleOutline" Foreground="#000" Height="16" Margin="5,0,0,0" VerticalAlignment="Center" />
+
+        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center">
+            <Run>Adam Feather</Run>
+            <Run>[Administrator]</Run>
+        </TextBlock>
+
+        <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,16,0" VerticalAlignment="Center">
+            <Run>v1.0.0</Run>
+        </TextBlock>
+    </DockPanel>
+
+</UserControl>
