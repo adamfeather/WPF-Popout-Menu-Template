@@ -24,7 +24,7 @@
 
         <Storyboard x:Key="ExpandMenuStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="ExpandedMenuGrid"
+                Storyboard.TargetName="MenuGrid"
                 Storyboard.TargetProperty="(Grid.Width)"
                 To="140" 
                 Duration="0:0:0.3">
@@ -33,7 +33,7 @@
 
         <Storyboard x:Key="CollapseMenuStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="ExpandedMenuGrid"
+                Storyboard.TargetName="MenuGrid"
                 Storyboard.TargetProperty="(Grid.Width)"
                 To="40" 
                 Duration="0:0:0.3">
@@ -122,52 +122,49 @@
                 </Grid>
             </Border>
 
-            <Grid Grid.Column="0" Background="#009FE3" Grid.Row="1" x:Name="MenuBorder">
+            <Grid Grid.Column="0" Grid.Row="1" Background="#009FE3" Width="40" x:Name="MenuGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
 
-                <Grid Width="40" x:Name="ExpandedMenuGrid" Background="#009FE3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="1" Text="Home" Style="{StaticResource MenuTextStyle}"  />
-                    <TextBlock Grid.Row="2" Text="Calendar" Style="{StaticResource MenuTextStyle}"   />
-                    <TextBlock Grid.Row="3" Text="Address Book" Style="{StaticResource MenuTextStyle}"   />
-                    <TextBlock Grid.Row="5" Text="Settings" Style="{StaticResource MenuTextStyle}"   />
-                    <TextBlock Grid.Row="6" Text="Logout" Style="{StaticResource MenuTextStyle}"   />
-                </Grid>
-
-                <Grid Width="40" Background="#009FE3" HorizontalAlignment="Left">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                    </Grid.RowDefinitions>
-
+                <WrapPanel Grid.Row="0">
                     <fa:ImageAwesome 
-                        Grid.Row="0" 
                         Icon="Bars" 
-                        Style="{StaticResource MenuIconStyle}" 
-                        Width="100" 
+                        Style="{StaticResource ExpandCollapseMenuIcon}" 
                         MouseLeftButtonDown="ExpandCollapseMenuIcon_Click">
                     </fa:ImageAwesome>
+                </WrapPanel>
 
-                    <fa:ImageAwesome Grid.Row="1" Icon="Home" Style="{StaticResource MenuIconStyle}" />
-                    <fa:ImageAwesome Grid.Row="2" Icon="Calendar" Style="{StaticResource MenuIconStyle}" />
-                    <fa:ImageAwesome Grid.Row="3" Icon="AddressBook" Style="{StaticResource MenuIconStyle}" />
-                    <fa:ImageAwesome Grid.Row="5" Icon="Cog" Style="{StaticResource MenuIconStyle}" />
-                    <fa:ImageAwesome Grid.Row="6" Icon="SignOut" Style="{StaticResource MenuIconStyle}" />
-                </Grid>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Style="{StaticResource MenuItemStyle}">
+                    <fa:ImageAwesome Icon="Home" Style="{StaticResource MenuIconStyle}" />
+                    <TextBlock Text="Home" Style="{StaticResource MenuTextStyle}" />
+                </StackPanel>
 
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Style="{StaticResource MenuItemStyle}">
+                    <fa:ImageAwesome Icon="Calendar" Style="{StaticResource MenuIconStyle}" />
+                    <TextBlock Text="Calendar" Style="{StaticResource MenuTextStyle}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Style="{StaticResource MenuItemStyle}">
+                    <fa:ImageAwesome Icon="AddressBook" Style="{StaticResource MenuIconStyle}" />
+                    <TextBlock Text="Address Book" Style="{StaticResource MenuTextStyle}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="5" Style="{StaticResource MenuItemStyle}">
+                    <fa:ImageAwesome Icon="Cog" Style="{StaticResource MenuIconStyle}" />
+                    <TextBlock Text="Settings" Style="{StaticResource MenuTextStyle}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="6" Style="{StaticResource MenuItemStyle}">
+                    <fa:ImageAwesome Icon="SignOut" Style="{StaticResource MenuIconStyle}" />
+                    <TextBlock Text="Logout" Style="{StaticResource MenuTextStyle}" />
+                </StackPanel>
             </Grid>
 
             <Grid Grid.Row="1" Grid.Column="1">
@@ -182,12 +179,11 @@
                         Foreground="WhiteSmoke">
                     </TextBlock>
 
-                    <fa:ImageAwesome Icon="AddressCardOutline" Height="200"  Foreground="#CC2936"></fa:ImageAwesome>
+                    <fa:ImageAwesome Icon="AddressCardOutline" Height="200"  Foreground="#CC2936" />
                 </DockPanel>
             </Grid>
 
-            <main:FooterView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  />
-
+            <main:FooterView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
         </Grid>
     </Border>
 </Window>
