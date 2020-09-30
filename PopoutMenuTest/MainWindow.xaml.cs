@@ -1,13 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
 
 namespace PopoutMenuTest
 {
     public partial class MainWindow : Window
     {
-        private bool _isMenuExpanded = false;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -20,22 +17,6 @@ namespace PopoutMenuTest
         private void MainWindow_StateChanged(object sender, System.EventArgs e)
         {
             SetMaximizedRestoreButtonStates();
-        }
-
-        private void ExpandCollapseMenuIcon_Click(object sender, MouseButtonEventArgs e)
-        {
-            ToggleMenuExpansion();
-        }
-
-        private void ToggleMenuExpansion()
-        {
-            var storyboardName = _isMenuExpanded ? "CollapseMenuStoryboard" : "ExpandMenuStoryboard";
-
-            var storyboard = (Storyboard) FindResource(storyboardName);
-
-            storyboard.Begin(this);
-
-            _isMenuExpanded = !_isMenuExpanded;
         }
 
         private void CloseWindowIcon_Click(object sender, MouseButtonEventArgs e)

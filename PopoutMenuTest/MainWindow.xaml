@@ -7,6 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:main="clr-namespace:PopoutMenuTest"
+    xmlns:home="clr-namespace:PopoutMenuTest.Home"
+    xmlns:addressBook="clr-namespace:PopoutMenuTest.AddressBook"
+    xmlns:calendar="clr-namespace:PopoutMenuTest.Calendar"
+    xmlns:settings="clr-namespace:PopoutMenuTest.Settings"
     mc:Ignorable="d"
     Title="Pop-out Menu Example" 
     Height="450" 
@@ -18,27 +22,13 @@
     WindowStartupLocation="CenterScreen"
     AllowsTransparency="False">
 
+    <Window.DataContext>
+        <main:MainWindowViewModel />
+    </Window.DataContext>
+
     <Window.Resources>
         <system:Double x:Key="TitleBarHeight">22</system:Double>
         <GridLength x:Key="TitleBarHeightGridLength">22</GridLength>
-
-        <Storyboard x:Key="ExpandMenuStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="MenuGrid"
-                Storyboard.TargetProperty="(Grid.Width)"
-                To="140" 
-                Duration="0:0:0.3">
-            </DoubleAnimation>
-        </Storyboard>
-
-        <Storyboard x:Key="CollapseMenuStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="MenuGrid"
-                Storyboard.TargetProperty="(Grid.Width)"
-                To="40" 
-                Duration="0:0:0.3">
-            </DoubleAnimation>
-        </Storyboard>
     </Window.Resources>
 
     <WindowChrome.WindowChrome>
@@ -122,65 +112,28 @@
                 </Grid>
             </Border>
 
-            <Grid Grid.Column="0" Grid.Row="1" Background="#009FE3" Width="40" x:Name="MenuGrid">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                </Grid.RowDefinitions>
-
-                <WrapPanel Grid.Row="0">
-                    <fa:ImageAwesome 
-                        Icon="Bars" 
-                        Style="{StaticResource ExpandCollapseMenuIcon}" 
-                        MouseLeftButtonDown="ExpandCollapseMenuIcon_Click">
-                    </fa:ImageAwesome>
-                </WrapPanel>
-
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Style="{StaticResource MenuItemStyle}">
-                    <fa:ImageAwesome Icon="Home" Style="{StaticResource MenuIconStyle}" />
-                    <TextBlock Text="Home" Style="{StaticResource MenuTextStyle}" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" Grid.Row="2" Style="{StaticResource MenuItemStyle}">
-                    <fa:ImageAwesome Icon="Calendar" Style="{StaticResource MenuIconStyle}" />
-                    <TextBlock Text="Calendar" Style="{StaticResource MenuTextStyle}" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" Grid.Row="3" Style="{StaticResource MenuItemStyle}">
-                    <fa:ImageAwesome Icon="AddressBook" Style="{StaticResource MenuIconStyle}" />
-                    <TextBlock Text="Address Book" Style="{StaticResource MenuTextStyle}" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" Grid.Row="5" Style="{StaticResource MenuItemStyle}">
-                    <fa:ImageAwesome Icon="Cog" Style="{StaticResource MenuIconStyle}" />
-                    <TextBlock Text="Settings" Style="{StaticResource MenuTextStyle}" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" Grid.Row="6" Style="{StaticResource MenuItemStyle}">
-                    <fa:ImageAwesome Icon="SignOut" Style="{StaticResource MenuIconStyle}" />
-                    <TextBlock Text="Logout" Style="{StaticResource MenuTextStyle}" />
-                </StackPanel>
-            </Grid>
+            <main:MenuView Grid.Column="0" Grid.Row="1" />
 
             <Grid Grid.Row="1" Grid.Column="1">
-                <DockPanel>
-                    <TextBlock 
-                        DockPanel.Dock="Top"
-                        HorizontalAlignment="Center"
-                        Text="Sample Application"
-                        FontSize="40"
-                        FontWeight="Bold"
-                        Margin="0,10"
-                        Foreground="WhiteSmoke">
-                    </TextBlock>
+                <ContentControl Content="{Binding ViewModelToDisplay}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type home:HomeViewModel}">
+                            <home:HomeView />
+                        </DataTemplate>
 
-                    <fa:ImageAwesome Icon="AddressCardOutline" Height="200"  Foreground="#CC2936" />
-                </DockPanel>
+                        <DataTemplate DataType="{x:Type addressBook:AddressBookViewModel}">
+                            <addressBook:AddressBookView />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type calendar:CalendarViewModel}">
+                            <calendar:CalendarView />
+                        </DataTemplate>
+
+                        <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
+                            <settings:SettingsView />
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
             </Grid>
 
             <main:FooterView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
