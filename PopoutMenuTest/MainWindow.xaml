@@ -5,22 +5,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:main="clr-namespace:PopoutMenuTest"
-    xmlns:home="clr-namespace:PopoutMenuTest.Home"
-    xmlns:addressBook="clr-namespace:PopoutMenuTest.AddressBook"
-    xmlns:calendar="clr-namespace:PopoutMenuTest.Calendar"
-    xmlns:settings="clr-namespace:PopoutMenuTest.Settings"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     mc:Ignorable="d"
     Title="Pop-out Menu Example" 
     Height="450" 
     Width="800"
-    WindowStyle="None"
-    ResizeMode="CanResizeWithGrip"
     MinWidth="800"
     MinHeight="600"
     WindowStartupLocation="CenterScreen"
-    AllowsTransparency="False">
+    AllowsTransparency="False"
+    WindowStyle="None"
+    ResizeMode="CanResizeWithGrip"
+    MaxHeight="{x:Static SystemParameters.VirtualScreenHeight}">
 
     <Window.DataContext>
         <main:MainWindowViewModel />
@@ -29,20 +26,24 @@
     <Window.Resources>
         <system:Double x:Key="TitleBarHeight">22</system:Double>
         <GridLength x:Key="TitleBarHeightGridLength">22</GridLength>
+        <GridLength x:Key="FooterHeightGridLength">22</GridLength>
     </Window.Resources>
 
     <WindowChrome.WindowChrome>
-        <WindowChrome ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" CaptionHeight="{StaticResource TitleBarHeight}"  />
+        <WindowChrome 
+            ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" 
+            CaptionHeight="{StaticResource TitleBarHeight}">
+        </WindowChrome>
     </WindowChrome.WindowChrome>
 
     <Border Style="{StaticResource WindowMainPanelStyle}">
 
-        <Grid Background="#404040">
+        <Grid Background="{StaticResource ApplicationGrey}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="{StaticResource TitleBarHeightGridLength}" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="20" />
+                <RowDefinition Height="{StaticResource FooterHeightGridLength}" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -50,7 +51,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#009FE3" Cursor="Hand">
+            <Border Grid.Row="0" Grid.ColumnSpan="2" Background="{StaticResource ApplicationBlue}" Cursor="Hand">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -115,25 +116,7 @@
             <main:MenuView Grid.Column="0" Grid.Row="1" />
 
             <Grid Grid.Row="1" Grid.Column="1">
-                <ContentControl Content="{Binding ViewModelToDisplay}">
-                    <ContentControl.Resources>
-                        <DataTemplate DataType="{x:Type home:HomeViewModel}">
-                            <home:HomeView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type addressBook:AddressBookViewModel}">
-                            <addressBook:AddressBookView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type calendar:CalendarViewModel}">
-                            <calendar:CalendarView />
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
-                            <settings:SettingsView />
-                        </DataTemplate>
-                    </ContentControl.Resources>
-                </ContentControl>
+                <ContentControl Content="{Binding ViewModelToDisplay}" />
             </Grid>
 
             <main:FooterView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />

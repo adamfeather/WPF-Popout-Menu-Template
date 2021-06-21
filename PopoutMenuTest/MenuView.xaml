@@ -27,7 +27,7 @@
         </Storyboard>
     </UserControl.Resources>
 
-    <Grid  Background="#009FE3" Width="40" x:Name="MenuGrid">
+    <Grid Background="{StaticResource ApplicationBlue}" Width="40" x:Name="MenuGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />

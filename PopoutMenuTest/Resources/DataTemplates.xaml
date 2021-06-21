@@ -1,0 +1,25 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:home="clr-namespace:PopoutMenuTest.Home"
+    xmlns:addressBook="clr-namespace:PopoutMenuTest.AddressBook"
+    xmlns:calendar="clr-namespace:PopoutMenuTest.Calendar"
+    xmlns:settings="clr-namespace:PopoutMenuTest.Settings">
+
+    <DataTemplate DataType="{x:Type home:HomeViewModel}">
+        <home:HomeView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type addressBook:AddressBookViewModel}">
+        <addressBook:AddressBookView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type calendar:CalendarViewModel}">
+        <calendar:CalendarView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
+        <settings:SettingsView />
+    </DataTemplate>
+
+</ResourceDictionary>
